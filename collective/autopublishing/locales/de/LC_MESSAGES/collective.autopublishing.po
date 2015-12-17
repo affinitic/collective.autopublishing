@@ -9,10 +9,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: da\n"
-"Language-Name: Danish\n"
-"Preferred-Encodings: utf-8\n"
-"Domain: collective.autopublishing\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
 
 #: ../browser/autopublishsettings.py:74
 msgid "Action"
@@ -21,7 +21,7 @@ msgstr ""
 #: ../browser/autopublishsettings.py:127
 #: ../profiles/default/controlpanel.xml
 msgid "Autopublishing"
-msgstr "Autopublicering"
+msgstr ""
 
 #: ../browser/autopublishsettings.py:41
 msgid "By default publishing date (the 'effective' index) is used for 'publish actions', and expiration date (the 'expires' index) is used for 'retract actions'. If a custom method is to be used for the date, enter index_id|object_method_id. If index_id = method_id  just enter index_id."
