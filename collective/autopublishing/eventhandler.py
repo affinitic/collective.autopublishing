@@ -1,4 +1,6 @@
 import logging
+from sets import Set
+
 from zope.component import ComponentLookupError, getUtility
 from zope.interface import alsoProvides
 
@@ -60,6 +62,7 @@ def handle_publishing(event, settings):
 
     actions = settings.publish_actions
     audit = ''
+    affected_objects = Set()
     for a in actions:
         audit += '\n\nRunning autopublishing (publish) for ' + \
                  'portal_types: %s, initial state: %s, transition: %s \n' \
@@ -101,9 +104,8 @@ def handle_publishing(event, settings):
                 total += 1
                 if not settings.dry_run:
                     try:
-                        o.setEnableAutopublishing(False)
                         wf.doActionFor(o, a.transition)
-                        o.reindexObject()
+                        affected_objects.add(o)
                         affected += 1
                     except WorkflowException:
                         logger.info("""The state '%s' of the workflow associated with the
@@ -114,6 +116,11 @@ def handle_publishing(event, settings):
 
         logger.info("""Ran collective.autopublishing (publish): %d objects found, %d affected
                     """ % (total, affected))
+
+    for o in affected_objects:
+        o.setEnableAutopublishing(False)
+        o.reindexObject()
+
     return audit
 
 def handle_retracting(event, settings):
@@ -127,6 +134,7 @@ def handle_retracting(event, settings):
 
     actions = settings.retract_actions
     audit = ''
+    affected_objects = Set()
     for a in actions:
         audit += '\n\nRunning autopublishing (publish) for ' + \
                  'portal_types: %s, initial state: %s, transition: %s \n' \
@@ -162,9 +170,8 @@ def handle_retracting(event, settings):
                 total += 1
                 if not settings.dry_run:
                     try:
-                        o.setEnableAutopublishing(False)
                         wf.doActionFor(o, a.transition)
-                        o.reindexObject()
+                        affected_objects.add(o)
                         affected += 1
                     except WorkflowException:
                         logger.info("""The state '%s' of the workflow associated with the
@@ -175,6 +182,11 @@ def handle_retracting(event, settings):
 
         logger.info("""Ran collective.autopublishing (retract): %d objects found, %d affected
                     """ % (total, affected))
+
+    for o in affected_objects:
+        o.setEnableAutopublishing(False)
+        o.reindexObject()
+
     return audit
 
 def transition_handler(event):
