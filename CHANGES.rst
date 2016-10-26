@@ -1,13 +1,20 @@
 Changes
 =======
 
-0.6 (2013-11-05) Unreleased
----------------------------
+0.6-improved (2016-10-26)
+-------------------------
 
 Features:
 
 - Now it is possible to make time-based transitions of any workflow transition, and for individual content types. Rules are triggered on either the publication date or the retraction date.
   [sunew]
+
+- Allow to handle same object for several actions
+  [laulaz]
+
+- Fix publish/retract by disabling CSRF Protection
+  [laulaz]
+
 
 0.5 (2013-10-21) Unreleased
 ---------------------------
