@@ -1,7 +1,7 @@
 Changes
 =======
 
-0.6.1-improved (unreleased)
+0.6.1-improved (2016-10-26)
 ---------------------------
 
 - Fix manifest
