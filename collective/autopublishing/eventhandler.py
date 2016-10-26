@@ -1,6 +1,8 @@
 import logging
 from zope.component import ComponentLookupError, getUtility
+from zope.interface import alsoProvides
 
+from plone.protect.interfaces import IDisableCSRFProtection
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.AdvancedQuery import Eq, In, Le
@@ -53,6 +55,8 @@ def handle_publishing(event, settings):
     catalog = event.context.portal_catalog
     wf = event.context.portal_workflow
     now = event.context.ZopeTime()
+    request = getattr(event.context, 'REQUEST')
+    alsoProvides(request, IDisableCSRFProtection)
 
     actions = settings.publish_actions
     audit = ''
@@ -118,6 +122,8 @@ def handle_retracting(event, settings):
     catalog = event.context.portal_catalog
     wf = event.context.portal_workflow
     now = event.context.ZopeTime()
+    request = getattr(event.context, 'REQUEST')
+    alsoProvides(request, IDisableCSRFProtection)
 
     actions = settings.retract_actions
     audit = ''
