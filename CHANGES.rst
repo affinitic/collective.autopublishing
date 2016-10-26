@@ -1,6 +1,12 @@
 Changes
 =======
 
+0.6.2-improved (unreleased)
+---------------------------
+
+- Nothing changed yet.
+
+
 0.6.1-improved (2016-10-26)
 ---------------------------
 
